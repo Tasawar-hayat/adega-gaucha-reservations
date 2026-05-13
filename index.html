@@ -1,0 +1,599 @@
+<!--
+  Adega Gaucha — Reservation Confirmation Page
+  KISSIMMEE BRANCH
+  WordPress page: /reservations/kissimmee/confirmation
+  Paste this file into the Elementor Custom HTML widget on that page only.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── Hide theme chrome ── */
+.taptap-logo-wrapper,.taptap-nav-wrapper,.taptap-header-wrapper,.taptap-mobile-menu-wrapper,
+.taptap-menu-button-wrapper,.taptap-search-button-wrapper,.taptap-search-wrapper,
+.taptap-search-background,.taptap-search-overlay,.taptap-by-bonfire,.taptap-by-bonfire-horizontal,
+.elementor-location-footer { display: none !important; }
+body { padding: 0 !important; margin: 0 !important; }
+html { overflow-x: hidden !important; }
+.taptap-main, .taptap-main-inner, .taptap-main-inner-inner,
+.site, .site-content, .site-primary, main, .entry-content {
+  padding-left: 0 !important; padding-right: 0 !important;
+  margin-left: 0 !important; margin-right: 0 !important;
+  max-width: none !important; width: 100% !important;
+}
+
+/* ══════════════════════════
+   BASE
+══════════════════════════ */
+.agc * { margin:0; padding:0; box-sizing:border-box; }
+.agc {
+  --gold:        #C9A84C;
+  --gold-dim:    rgba(201,168,76,0.12);
+  --gold-border: rgba(201,168,76,0.45);
+  --dark:        #1C1714;
+  --cream:       #F5F3EB;
+  --cream-2:     #EDE9DE;
+  --text:        #2A2118;
+  --text-muted:  #7A6E5F;
+  --text-light:  #A89E90;
+  --border:      #DDD8CE;
+  --serif:       'Libre Baskerville', Georgia, serif;
+  --sans:        'Inter', -apple-system, sans-serif;
+  font-family:   var(--sans);
+  background:    var(--cream);
+  min-height:    100vh;
+  display:       flex;
+  flex-direction:column;
+  align-items:   center;
+  justify-content: flex-start;
+  padding: 64px 20px 80px;
+}
+
+/* ══════════════════════════
+   HEADER (outside card)
+══════════════════════════ */
+.agc-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.agc-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.agc-eyebrow::before,
+.agc-eyebrow::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.agc-headline {
+  font-family: var(--serif);
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 400;
+  color: var(--dark) !important;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+.agc-headline em {
+  font-style: italic;
+  color: var(--gold) !important;
+  opacity: 1;
+}
+
+/* ══════════════════════════
+   CARD
+══════════════════════════ */
+.agc-card {
+  background: #fff;
+  border: 1.5px solid var(--gold-border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(201,168,76,0.10),
+    0 1px 4px rgba(28,23,20,0.06);
+}
+
+/* Card top accent bar */
+.agc-card::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, #E8C96A 50%, var(--gold) 100%);
+}
+
+/* ── Section label ── */
+.agc-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 28px 32px 6px;
+}
+
+/* ── Confirmation number ── */
+.agc-conf-num {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--gold);
+  text-align: center;
+  padding: 0 32px 22px;
+  letter-spacing: 0.5px;
+}
+
+/* ── 3-column strip ── */
+.agc-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+}
+.agc-strip-col {
+  padding: 18px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.agc-strip-col + .agc-strip-col {
+  border-left: 1px solid var(--border);
+}
+.agc-strip-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.agc-strip-val {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.3;
+}
+
+/* ── Divider ── */
+.agc-divider {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ── Location block ── */
+.agc-location {
+  padding: 24px 32px;
+  text-align: center;
+}
+.agc-rest-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.agc-rest-address {
+  font-size: 13px;
+  color: var(--gold);
+  text-decoration: none; font-weight: 500;
+  line-height: 1.5;
+  display: block;
+  transition: opacity 0.15s;
+}
+.agc-rest-address:hover { opacity: 0.75; }
+.agc-rest-phone {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ── Special request / dining experience block ── */
+.agc-block {
+  padding: 22px 32px;
+}
+.agc-block-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.agc-block-val {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ── Guest block ── */
+.agc-guest {
+  padding: 22px 32px 28px;
+  text-align: center;
+}
+.agc-guest-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.agc-guest-detail {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ── Manage button ── */
+.agc-manage-btn {
+  display: block;
+  width: calc(100% - 64px);
+  margin: 0 32px 28px;
+  padding: 14px 20px;
+  background: transparent;
+  border: 1.5px solid var(--gold-border);
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.agc-manage-btn:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); color: var(--dark); }
+@media (max-width: 520px) {
+  .agc-manage-btn { width: calc(100% - 40px); margin-left: 20px; margin-right: 20px; }
+}
+
+/* ── Card footer ── */
+.agc-card-footer {
+  border-top: 1px solid var(--border);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--cream);
+}
+.agc-ot-label {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+.agc-ot-logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ── Error state ── */
+.agc-error {
+  background: #fff;
+  border: 1.5px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 40px 32px;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+}
+.agc-error::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, #E8C96A 50%, var(--gold) 100%);
+  margin: -40px -32px 32px;
+  border-radius: 10px 10px 0 0;
+}
+.agc-error h3 {
+  font-family: var(--serif);
+  font-size: 20px; color: var(--dark); font-weight: 400; margin-bottom: 12px;
+}
+.agc-error p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+.agc-error a {
+  display: inline-block; background: var(--gold); color: var(--dark); padding: 12px 28px;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  border-radius: 6px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .agc { padding: 40px 16px 60px; }
+  .agc-strip-val { font-size: 13px; }
+  .agc-block, .agc-location, .agc-guest { padding-left: 20px; padding-right: 20px; }
+  .agc-section-label, .agc-conf-num { padding-left: 20px; padding-right: 20px; }
+  .agc-card-footer { padding: 16px 20px; }
+}
+
+/* ── Full-viewport edge-to-edge layout ── */
+.elementor-section,
+.elementor-top-section,
+.elementor-inner-section,
+.e-con, .e-con-inner, .e-child { padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+.elementor-container,
+.elementor-column,
+.elementor-col-100,
+.elementor-column-wrap,
+.elementor-widget-wrap,
+.elementor-widget-container { padding: 0 !important; margin: 0 !important; max-width: none !important; width: 100% !important; overflow: visible !important; }
+.agc {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-top: 0 !important;
+}
+</style>
+
+<div class="agc" id="agc-root">
+
+  <div class="agc-header">
+    <p class="agc-eyebrow">Congratulations</p>
+    <h1 class="agc-headline">We look forward to<br><em>having you!</em></h1>
+  </div>
+
+  <div class="agc-card" id="agc-card">
+
+    <p class="agc-section-label">Reservation Summary</p>
+    <p class="agc-conf-num" id="agc-conf">Confirmation #—</p>
+
+    <!-- Date / Time / Guests strip -->
+    <div class="agc-strip">
+      <div class="agc-strip-col">
+        <span class="agc-strip-label">Date</span>
+        <span class="agc-strip-val" id="agc-date">—</span>
+      </div>
+      <div class="agc-strip-col">
+        <span class="agc-strip-label">Time</span>
+        <span class="agc-strip-val" id="agc-time">—</span>
+      </div>
+      <div class="agc-strip-col">
+        <span class="agc-strip-label">Guests</span>
+        <span class="agc-strip-val" id="agc-guests">—</span>
+      </div>
+    </div>
+
+    <hr class="agc-divider">
+
+    <!-- Location -->
+    <div class="agc-location">
+      <p class="agc-rest-name" id="agc-rest">—</p>
+      <a class="agc-rest-address" id="agc-map" href="#" target="_blank" rel="noopener">—</a>
+      <p class="agc-rest-phone" id="agc-phone"></p>
+    </div>
+
+    <hr class="agc-divider">
+
+    <!-- Dining Experience (shown only if booked) -->
+    <div class="agc-block" id="agc-exp-block" style="display:none;background:rgba(201,168,76,0.05);border-bottom:1px solid var(--border);">
+      <p class="agc-block-label" style="color:var(--gold);">Dining Experience</p>
+      <p class="agc-block-val" id="agc-exp-name" style="color:var(--dark);font-weight:600;"></p>
+    </div>
+
+    <!-- Special Request -->
+    <div class="agc-block">
+      <p class="agc-block-label">Special Request</p>
+      <p class="agc-block-val" id="agc-sr">N/A</p>
+    </div>
+
+    <hr class="agc-divider">
+
+    <!-- Guest name + contact -->
+    <div class="agc-guest">
+      <p class="agc-guest-name" id="agc-name">—</p>
+      <p class="agc-guest-detail" id="agc-email"></p>
+      <p class="agc-guest-detail" id="agc-gphone"></p>
+    </div>
+
+    <!-- Manage / Cancel Reservation -->
+    <a class="agc-manage-btn" id="agc-manage" href="#" target="_blank" rel="noopener" style="display:none;">
+      Manage / Cancel Reservation
+    </a>
+
+    <!-- Card footer -->
+    <div class="agc-card-footer">
+      <span class="agc-ot-label">Powered by</span>
+      <span class="agc-ot-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64">
+          <path d="M40.776 8.776C27.95 8.776 17.553 19.173 17.553 32S27.95 55.224 40.776 55.224 64 44.827 64 32 53.603 8.776 40.776 8.776zm0 29.03A5.76 5.76 0 0 1 34.97 32a5.76 5.76 0 0 1 5.806-5.806A5.76 5.76 0 0 1 46.582 32c0 3.105-2.7 5.806-5.806 5.806zM0 32a5.76 5.76 0 0 1 5.806-5.806A5.76 5.76 0 0 1 11.612 32a5.76 5.76 0 0 1-5.806 5.806C2.565 37.806 0 35.105 0 32" fill="#DA3743"/>
+        </svg>
+        OpenTable
+      </span>
+    </div>
+
+  </div><!-- /.agc-card -->
+
+</div><!-- /.agc -->
+
+<script>
+(function() {
+  /* ════════════════════════════════════════════════════════
+     LOCATION CONFIG — Kissimmee
+  ════════════════════════════════════════════════════════ */
+  var LOCATION_SLUG    = 'kissimmee';
+  var LOCATION_NAME    = 'Adega Gaucha \u2013 Kissimmee';
+  var LOCATION_ADDRESS = '7804 W Irlo Bronson Memorial Hwy, Kissimmee, FL 34747';
+  var LOCATION_MAP     = 'https://www.google.com/maps/search/Adega+Gaucha+7804+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL';
+  var LOCATION_PHONE   = '(321) 245 55 55';
+  var LOCATION_BACK    = '/reservations/kissimmee';
+
+  /* ── Read booking data from sessionStorage ── */
+  var confNum   = '';
+  var guestname = '';
+  var date      = '';
+  var time      = '';
+  var guests    = '';
+  var manageUrl = '';
+  var email     = '';
+  var gphone    = '';
+  var sr        = '';
+  var expName   = '';
+  try {
+    var stored = JSON.parse(sessionStorage.getItem('agConfirmation') || 'null');
+    if (stored && stored.confirmation) {
+      confNum   = stored.confirmation             || '';
+      guestname = stored.guestname || stored.name || '';
+      date      = stored.date                     || '';
+      time      = stored.time                     || '';
+      guests    = stored.guests                   || '';
+      manageUrl = stored.manage                   || '';
+      email     = stored.email                    || '';
+      gphone    = stored.phone                    || '';
+      sr        = stored.sr                       || '';
+      expName   = stored.expName                  || '';
+      
+      /* ── GTM dataLayer push for conversion tracking ── */
+      window.dataLayer = window.dataLayer || [];
+      
+      // Format date to YYYY-MM-DD
+      var formattedDate = '';
+      try {
+        var dateOnly = date.replace(/\s+at\s+\d+:\d+.*$/i, '').trim();
+        var d = new Date(dateOnly);
+        if (!isNaN(d.getTime())) {
+          formattedDate = d.getFullYear() + '-' + 
+                          ('0' + (d.getMonth() + 1)).slice(-2) + '-' + 
+                          ('0' + d.getDate()).slice(-2);
+        }
+      } catch(e) {}
+
+      // Format time to 24h HH:MM
+      var formattedTime = '';
+      try {
+        var tMatch = time.match(/(\d+):(\d+)\s*(AM|PM)/i);
+        if (tMatch) {
+          var hours = parseInt(tMatch[1], 10);
+          var mins = tMatch[2];
+          var ampm = tMatch[3].toUpperCase();
+          if (ampm === 'PM' && hours < 12) hours += 12;
+          if (ampm === 'AM' && hours === 12) hours = 0;
+          formattedTime = ('0' + hours).slice(-2) + ':' + mins;
+        } else {
+          formattedTime = time;
+        }
+      } catch(e) {}
+
+      window.dataLayer.push({
+        event: 'reservation_complete',
+        location: LOCATION_SLUG,
+        booking_id: confNum,
+        covers: parseInt(guests) || 0,
+        reservation_date: formattedDate || date,
+        reservation_time: formattedTime || time,
+        estimated_value: (parseInt(guests) || 0) * 50,
+        currency: 'USD'
+      });
+      console.log('GTM dataLayer pushed:', { event: 'reservation_complete', booking_id: confNum });
+
+      // Only remove after dataLayer push to be safe
+      sessionStorage.removeItem('agConfirmation');
+    }
+  } catch(e) {
+    console.error('Error parsing booking data:', e);
+  }
+
+  /* ── Redirect if opened directly without booking data ── */
+  if (!confNum) {
+    window.location.replace(LOCATION_BACK);
+    return;
+  }
+
+  /* ── Confirmation number ── */
+  var confEl = document.getElementById('agc-conf');
+  if (confEl) confEl.textContent = 'Confirmation #' + confNum;
+
+  /* ── Date ── */
+  var dateEl = document.getElementById('agc-date');
+  if (dateEl && date) {
+    try {
+      var dateOnly = date.replace(/\s+at\s+\d+:\d+.*$/i, '').trim();
+      var d = new Date(dateOnly);
+      if (!isNaN(d.getTime())) {
+        dateEl.textContent = d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+      } else {
+        dateEl.textContent = dateOnly;
+      }
+    } catch(e) {
+      dateEl.textContent = date;
+    }
+  }
+
+  /* ── Time ── */
+  var timeEl = document.getElementById('agc-time');
+  if (timeEl && time) timeEl.textContent = time;
+
+  /* ── Guests ── */
+  var guestsEl = document.getElementById('agc-guests');
+  if (guestsEl && guests) {
+    guestsEl.textContent = guests + (guests === '1' ? ' Guest' : ' Guests');
+  }
+
+  /* ── Restaurant info ── */
+  var restEl = document.getElementById('agc-rest');
+  if (restEl) restEl.textContent = LOCATION_NAME;
+
+  var mapEl = document.getElementById('agc-map');
+  if (mapEl) { mapEl.href = LOCATION_MAP; mapEl.textContent = LOCATION_ADDRESS; }
+
+  var phoneEl = document.getElementById('agc-phone');
+  if (phoneEl) phoneEl.textContent = LOCATION_PHONE;
+
+  /* ── Guest name ── */
+  var nameEl = document.getElementById('agc-name');
+  if (nameEl && guestname) nameEl.textContent = guestname;
+
+  /* ── Guest email ── */
+  var emailEl = document.getElementById('agc-email');
+  if (emailEl && email) emailEl.textContent = email;
+
+  /* ── Guest phone ── */
+  var gphoneEl = document.getElementById('agc-gphone');
+  if (gphoneEl && gphone) gphoneEl.textContent = gphone;
+
+  /* ── Special request ── */
+  var srEl = document.getElementById('agc-sr');
+  if (srEl) srEl.textContent = (sr && sr.trim()) ? sr : 'N/A';
+
+  /* ── Dining experience ── */
+  if (expName) {
+    var expBlock  = document.getElementById('agc-exp-block');
+    var expNameEl = document.getElementById('agc-exp-name');
+    if (expBlock)  expBlock.style.display = 'block';
+    if (expNameEl) expNameEl.textContent  = expName;
+  }
+
+  /* ── Manage / Cancel button ── */
+  var manageEl = document.getElementById('agc-manage');
+  if (manageEl && manageUrl) {
+    manageEl.href          = manageUrl;
+    manageEl.style.display = 'block';
+  }
+})();
+</script>
